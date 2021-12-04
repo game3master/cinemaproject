@@ -6,6 +6,12 @@ import { Table, Button } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import nextId from "react-id-generator";
+import FilmClass from "../../class/FilmClass";
+import EditForm from "../../forms/EditForm"
+import DeleteForm from "../../forms/DeleteForm"
+import AddFilm from  "../../AddFilm"
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 
 class Films extends Component {
@@ -13,15 +19,50 @@ class Films extends Component {
     super(props)
     this.state = {
       filmList: [
-        { id: parseInt(nextId().slice(2)), title: "Venom", duration: 240 },
-        { id: parseInt(nextId().slice(2)), title: "Atak Ludzi Grzybów", duration: 90 },
-        { id: parseInt(nextId().slice(2)), title: "Hannibal", duration: 131 },
-        { id: parseInt(nextId().slice(2)), title: "Smakosz", duration: 90 },
+       new FilmClass(parseInt(nextId().slice(2)),  "Venom",  240 ),
+       new FilmClass( parseInt(nextId().slice(2)),  "Atak Ludzi Grzybów",  90 ),
+        new FilmClass( parseInt(nextId().slice(2)),  "Hannibal",  131 ),
+        new FilmClass( parseInt(nextId().slice(2)),  "Smakosz",  90 ),
       ],
-      id: undefined,
-      title: '',
-      duration: '',
     };
+  }
+
+
+  createNotification(message) {
+    NotificationManager.success('Success', message);
+  }
+
+  showDeleteForm = (id) => {
+    const { filmList } = this.state;
+    var index = filmList.findIndex(function (value) {
+      return value.id === id;
+    });
+
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <DeleteForm index={index} onClose={onClose} deleteFilm={this.deleteFilm} />
+        );
+      }
+    });
+  }
+
+  showEditForm = (id) => {
+    const { filmList } = this.state;
+    var index = filmList.findIndex(function (value) {
+      return value.id === id;
+    });
+
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div>
+            <EditForm filmList={filmList} index={index} onClose={onClose} editFilm={this.editFilm} />
+            <NotificationContainer />
+          </div>
+        );
+      }
+    });
   }
 
   onChange(e) {
@@ -38,19 +79,34 @@ class Films extends Component {
     });
   }
   
-  addFilm() {
+  addFilm = (s) => {
     this.setState(state => {
       var films = state.filmList;
-        films.push({
-          id: parseInt(nextId().slice(2)),
-          title: state.title,
-          duration: state.duration,
-        })
+      var id = state.filmList.length + 1;
+      let newFilm = new FilmClass(id, s.title, s.duration);
+      films.push(newFilm);
       return { filmList: films }
-  })
+    });
   }
 
+  editFilm = (index, s) => {
+    this.setState(state => {
+      var films = state.filmList;
+      films[index].title = s.editTitle;
+      films[index].duration = s.editDuration;
 
+      return { filmList: films }
+    });
+    this.createNotification('Film was edited successfully');
+  }
+
+  deleteFilm = (index) => {
+    this.setState(state => {
+      var films = state.filmList;
+      films.splice(index, 1);
+      return { filmList: films }
+    });
+  }
 
 
 
@@ -77,24 +133,15 @@ class Films extends Component {
                   id={film.id}
                   title={film.title}
                   duration={film.duration}
+                  showEditForm={this.showEditForm}
+                  showDeleteForm={this.showDeleteForm}
                 />
               );
             })}
           </thead>
           <tbody></tbody>
         </Table>
-        <Table striped bordered>
-          <tbody>
-            <tr>
-            <td colSpan="3" style={{ textAlign: "center" }}><i><b>Add new film</b></i></td>
-            </tr>
-            <tr>
-              <td><input type="text" placeholder="Title of film" id="title" onChange={(e) => this.onChange(e)} /></td>
-              <td><input type="number"  id="duration"  onChange={(e) => this.onChange(e)}></input> </td>          
-              <td><Button variant="secondary" onClick={() => this.addFilm()}>Add Film</Button></td>
-            </tr>
-          </tbody>
-        </Table>
+        <AddFilm addFilm = {this.addFilm }/>
       </div>
     );
   }

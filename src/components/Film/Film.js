@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as Icon from "react-bootstrap-icons";
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+
 const Film = (props) => {
   return (
     <tr>
@@ -10,11 +12,11 @@ const Film = (props) => {
       <td >
       <div className="justifyRow">
           
-                <div >
+                <div onClick = {() => props.showEditForm(props.id)} >
                   <Icon.Pencil display size={30} color="green" className="item" />
                   <i>Edit </i>
                 </div>
-                <div style={{ display: "block" }}>
+                <div style={{ display: "block" }}  onClick = {() => props.showDeleteForm(props.id)}  >
                   <Icon.Trash size={30} color="grey" className="item" />
                   <i>Delete </i>
                 </div>
