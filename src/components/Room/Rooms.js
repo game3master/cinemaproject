@@ -67,8 +67,8 @@ class Rooms extends Component {
           <thead>
             <tr align ="center">
               <th>id</th>
-              <th>Title</th>
-              <th>Duration</th>
+              <th>Space</th>
+              <th>SpaceLeft</th>
               <th>Actions</th>
             </tr>
           </thead>
