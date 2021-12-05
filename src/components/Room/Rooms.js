@@ -1,19 +1,19 @@
 import  React, {Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import Film from "./Film";
+import Room from "./Room";
 import { Table, Button } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import nextId from "react-id-generator";
-import FilmClass from "../../class/FilmClass";
-import EditFilmForm from "../../forms/EditFilmForm"
-import DeleteFilmForm from "../../forms/DeleteFilmForm"
-import AddFilm from  "../../other/AddFilm"
+import RoomClass from "../../class/RoomClass";
+import EditRoomForm from "../../forms/EditRoomForm"
+import DeleteRoomForm from "../../forms/DeleteRoomForm"
+import AddRoom from  "../../other/AddRoom"
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 
-class Films extends Component {
+class Rooms extends Component {
  
 
 
@@ -21,24 +21,24 @@ class Films extends Component {
     NotificationManager.success('Success', message);
   }
 
-  showDeleteFilmForm = (id) => {
-    const { filmList, deleteFilm } = this.props;
-    var index = filmList.findIndex(function (value) {
+  showDeleteRoomForm = (id) => {
+    const { roomList, deleteRoom } = this.props;
+    var index = roomList.findIndex(function (value) {
       return value.id === id;
     });
 
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
-          <DeleteFilmForm index={index} onClose={onClose} deleteFilm={deleteFilm} />
+          <DeleteRoomForm index={index} onClose={onClose} deleteRoom={deleteRoom} />
         );
       }
     });
   }
 
-  showEditFilmForm = (id) => {
-    const { filmList, editFilm } = this.props;
-    var index = filmList.findIndex(function (value) {
+  showEditRoomForm = (id) => {
+    const { roomList, editRoom } = this.props;
+    var index = roomList.findIndex(function (value) {
       return value.id === id;
     });
 
@@ -46,22 +46,23 @@ class Films extends Component {
       customUI: ({ onClose }) => {
         return (
           <div>
-            <EditFilmForm filmList={filmList} index={index} onClose={onClose} editFilm={editFilm} />
+            <EditRoomForm roomList={roomList} index={index} onClose={onClose} editRoom={editRoom} />
             <NotificationContainer />
           </div>
         );
       }
     });
   }
-
+  
 
 
 
   render() {
-    const { filmList } = this.props;
+    
+    const { roomList } = this.props;
     return (
       <div className="content">
-        <div className="header" >List of films</div>
+        <div className="header" >List of rooms</div>
         <Table striped bordered>
           <thead>
             <tr align ="center">
@@ -73,15 +74,15 @@ class Films extends Component {
           </thead>
           <tbody>
             {
-           filmList && filmList.map((film, key) => {
+          roomList && roomList.map((room, key) => {
               return (
-                <Film
+                <Room
                   key={key}
-                  id={film.id}
-                  title={film.title}
-                  duration={film.duration}
-                  showEditFilmForm={this.showEditFilmForm}
-                  showDeleteFilmForm={this.showDeleteFilmForm}
+                  id={room.id}
+                  space={room.space}
+                  spaceLeft={room.spaceLeft}
+                  showEditRoomForm={this.showEditRoomForm}
+                  showDeleteRoomForm={this.showDeleteRoomForm}
                 />
               );
             })}
@@ -91,4 +92,4 @@ class Films extends Component {
     );
   }
 }
-export default Films;
+export default Rooms;

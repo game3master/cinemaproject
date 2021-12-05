@@ -2,8 +2,8 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import * as Icon from "react-bootstrap-icons";
 
-const DeleteForm = (props) => {
-    const { deleteFilm, onClose, index } = props;
+const DeleteRoomForm = (props) => {
+    const { deleteRoom, onClose, index } = props;
     return (
         <div className="alertForm">
             <span className="closeButton">
@@ -11,12 +11,12 @@ const DeleteForm = (props) => {
             </span>
             <div className="importantInfoInAlert">
                 <Icon.Info size={60} color="#017BFF" />
-                Are you sure you want to delete this film?
+                Are you sure you want to delete this Room?
             </div>
-            <div className="filmDeleteButtons">
+            <div className="RoomDeleteButtons">
             <Button variant="success" style={{ marginLeft: "10px" }}
                     onClick={() => {
-                        deleteFilm(index);
+                        deleteRoom(index);
                         onClose();
                     }}>Yes</Button>
                 <Button variant="danger" onClick={() => onClose()}>No</Button>
@@ -25,4 +25,4 @@ const DeleteForm = (props) => {
     );
 };
 
-export default DeleteForm;
+export default DeleteRoomForm;

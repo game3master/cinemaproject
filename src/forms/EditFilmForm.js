@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as Icon from "react-bootstrap-icons";
 import { Button } from 'react-bootstrap';
 
-class EditForm extends Component {
+class EditFilmForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -42,4 +42,4 @@ class EditForm extends Component {
 }
 
 
-export default EditForm;
+export default EditFilmForm;
