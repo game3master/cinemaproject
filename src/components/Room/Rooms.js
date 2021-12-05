@@ -41,7 +41,7 @@ class Rooms extends Component {
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
-          <DeleteForm index={index} onClose={onClose} deleteFilm={this.deleteFilm} />
+          <DeleteForm index={index} onClose={onClose} deleteRoom={this.deleteRoom} />
         );
       }
     });

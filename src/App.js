@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Films from "./components/Film/Films";
+import Rooms from "./components/Room/Rooms";
 import ReactDOM from "react-dom";
 
 // function App() {
@@ -7,11 +7,11 @@ import ReactDOM from "react-dom";
 
 // export default App;
 
-class App extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
+// class App extends Component{
+//     constructor(props){
+//         super(props);
+//         this.state = {
 
-        }
-    }
-}
+//         }
+//     }
+// }

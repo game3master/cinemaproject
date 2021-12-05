@@ -11,9 +11,9 @@ const DeleteForm = (props) => {
             </span>
             <div className="importantInfoInAlert">
                 <Icon.Info size={60} color="#017BFF" />
-                Are you sure you want to delete this room?
+                Are you sure you want to delete this Room?
             </div>
-            <div className="roomDeleteButtons">
+            <div className="RoomDeleteButtons">
             <Button variant="success" style={{ marginLeft: "10px" }}
                     onClick={() => {
                         deleteRoom(index);
