@@ -1,0 +1,51 @@
+.content{
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: 18px;
+}
+
+.item:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.checked{
+  color:green;
+  font-weight: bold;
+}
+
+.arrow:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.justifyView{
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+.justifyColumn{
+  float:left;
+  display: block;
+}
+
+.justifyRow{
+  display:flex;
+  float: left;
+  margin-inline: 30px;
+}
+
+.alertColor{
+  color: black;
+}
+
+.alertBorderRed{
+  box-shadow: 0 0 10px red;
+  border: 1px solid red;
+}
+
+.alertBorderGray{
+  border: 1px solid gray;
+}
